@@ -34,6 +34,8 @@ gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 gem "redis", "~> 4.0"
 
+ gem "faker"
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
@@ -75,7 +77,6 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
   gem "database_cleaner"
-  gem "faker"
   gem "factory_bot_rails", "~> 4.0"
   gem "shoulda-matchers", "~> 3.1"
 end
