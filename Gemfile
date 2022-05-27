@@ -7,6 +7,8 @@ gem "devise"
 
 gem "rolify"
 
+gem "bulma-rails", "~> 0.8.0"
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.3"
 
@@ -34,6 +36,8 @@ gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 gem "redis", "~> 4.0"
 
+ gem "faker"
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
@@ -60,7 +64,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
-  gem "rspec-rails", '~> 3.5'
+  gem "rspec-rails", '~> 4.0.1'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
@@ -75,7 +79,6 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
   gem "database_cleaner"
-  gem "faker"
   gem "factory_bot_rails", "~> 4.0"
   gem "shoulda-matchers", "~> 3.1"
 end
