@@ -6,14 +6,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     # GET /resource/sign_up
     def new
+      @teams = Team.all
       super
     end
 
     # POST /resource
     def create
       super
-      current_user.add_role :member
-      Member.create(user_id: current_user.id, framework: current_user.framework)
+      current_user.add_role :member if current_user.present?
     end
 
     # GET /resource/edit

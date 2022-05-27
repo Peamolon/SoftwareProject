@@ -1,0 +1,33 @@
+<% teams = Team.all%>
+<% teams.each do |team| %>
+    <div class="col-12 col-md-6 mt-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <p class="subtitle card-text" style="font-weight: bold;"><%= team.name %></p>
+                <table class="table">
+                    <thead>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Framework</th>
+                    </thead>
+                    <tbody>
+                        <% team.users.each do |member| %>
+                            <tr>
+                                <td><%= member.full_name %></td>
+                                <td><%= member.framework %></td>
+                            </tr>
+                        <% end %>
+                </table>
+                <%if team.members.count < 3%>
+                    <a class="btn btn-primary" href="#" title="Item Link">Unirme</a>                   
+                <%else%>
+                    <div class="alert alert-danger">
+                        <strong>¡Lo sentimos!</strong>
+                        <p>El equipo está lleno.</p>
+                    </div>
+                    
+                <%end%>
+                
+            </div>
+        </div>
+    </div>
+<%end%>
