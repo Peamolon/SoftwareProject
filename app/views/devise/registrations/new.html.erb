@@ -23,7 +23,6 @@
             <div class="multisteps-form__progress">
               <button class="multisteps-form__progress-btn js-active" type="button" title="User Info">Información</button>
               <button class="multisteps-form__progress-btn" type="button" title="Address">Framework</button>
-              <button class="multisteps-form__progress-btn" type="button" title="Order Info">Tu equipo</button>
             </div>
           </div>
         </div>
@@ -76,33 +75,8 @@
                     </div>
                     <div class="button-row d-flex mt-4">
                       <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
-                      <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button>
+                      <%= f.submit "Sign up",  class: 'btn btn-primary ml-auto js-btn-next' %>
                     </div>
-                  </div>
-                </div>
-                <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
-                  <h3 class="multisteps-form__title"></h3>
-                  <div class="multisteps-form__content">
-                    <div class="row">
-                      <%= render 'teams/list_teams', teams: @teams%>
-                    </div>
-                    <div class="row">
-                      <div class="button-row d-flex mt-4 col-12">
-                        <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
-                        <%= f.submit "Sign up",  class: 'btn btn-primary ml-auto js-btn-next' %>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
-                  <h3 class="multisteps-form__title">Additional Message</h3>
-                  <div class="multisteps-form__content">
-                    <div class="form-row mt-4">
-                      <textarea class="multisteps-form__textarea form-control" placeholder="Additional Message and Questions"></textarea>
-                    </div>
-                    <div class="button-row d-flex mt-4">
-                      <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
-                      <button class="btn btn-success ml-auto" type="button" title="Send">Send</button>
                   </div>
                 </div>
               </div>
