@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_27_193451) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_27_234136) do
   create_table "admins", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
@@ -37,6 +37,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_27_193451) do
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["name"], name: "index_roles_on_name"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
+  end
+
+  create_table "team_invitations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.date "invited_at"
+    t.bigint "member_id", null: false
+    t.bigint "team_id", null: false
+    t.date "accepted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_team_invitations_on_member_id"
+    t.index ["team_id"], name: "index_team_invitations_on_team_id"
   end
 
   create_table "teams", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -71,4 +82,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_27_193451) do
 
   add_foreign_key "admins", "users"
   add_foreign_key "members", "users"
+  add_foreign_key "team_invitations", "members"
+  add_foreign_key "team_invitations", "teams"
 end

@@ -18,7 +18,7 @@
                         <% end %>
                 </table>
                 <%if team.members.count < 3%>
-                    <a class="btn btn-primary" href="#" title="Item Link">Unirme</a>                   
+                    <button onclick="sendInvitation(<%= team.id %>)" class="btn btn-primary">Unirme</button>                
                 <%else%>
                     <div class="alert alert-danger">
                         <strong>¡Lo sentimos!</strong>
@@ -31,3 +31,29 @@
         </div>
     </div>
 <%end%>
+<script>
+    function sendInvitation(team_id) {
+        let data = {
+            team_invitation: {
+                team_id: team_id,
+                member_id: <%= current_user.id %>
+
+            }
+        }
+        fetch('/team_invitations', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        window.location.replace("<%= root_path %>");
+
+    }
+
+</script>
+
+
+
+
+
