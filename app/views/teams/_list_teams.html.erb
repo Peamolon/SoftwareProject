@@ -10,24 +10,28 @@
                         <th scope="col">Framework</th>
                     </thead>
                     <tbody>
-                        <% team.users.each do |member| %>
+                        <% team.users.each do |user| %>
                             <tr>
-                                <td><%= member.full_name %></td>
-                                <td><%= member.framework %></td>
-                                <% if member.has_role? :captain%>
+                                <td><%= user.full_name %></td>
+                                <td><%= user.framework %></td>
+                                <% if user.has_role? :captain%>
                                     <td>Capitan</td>
                                 <% end %>
                             </tr>
                         <% end %>
                 </table>
-                <%if team.members.count < 3%>
-                    <button onclick="sendInvitation(<%= team.id %>)" class="btn btn-primary">Unirme</button>                
-                <%else%>
+                <% if team.team_invitations.where(member_id: current_user.member.id).present?%>
+                    <div class="alert alert-warning">
+                        <strong>Ya enviaste una invitación a este equipo</strong>
+                    </div>
+
+                <%elsif team.members.count >= 3%>
                     <div class="alert alert-danger">
                         <strong>¡Lo sentimos!</strong>
                         <p>El equipo está lleno.</p>
                     </div>
-                    
+                <%else%>
+                    <button onclick="sendInvitation(<%= team.id %>)" class="btn btn-primary">Unirme</button>                
                 <%end%>
                 
             </div>
@@ -39,8 +43,7 @@
         let data = {
             team_invitation: {
                 team_id: team_id,
-                member_id: <%= current_user.id %>
-
+                member_id: <%= current_user.member.id %>
             }
         }
         fetch('/team_invitations', {

@@ -18,21 +18,22 @@
               <li class="nav-item">
                 <a class="nav-link" href="/team_invitations">
                   <i class="fa fa-envelope-o">
-                    <span class="badge badge-danger"><%=current_user.member.team.team_invitations.count %></span>
+                    <span class="badge badge-danger"><%=current_user.member.team.team_invitations.where(accepted_at: nil).count %></span>
                   </i>
                   requests
                 </a>
               </li>
             <% end %>
+            <% if current_user.member.has_team?%>
+              <li class="nav-item">
+                <a class="nav-link" href="/teams/<%=current_user.member.team.id%>">
+                  <i class="fa fa-users"></i>
+                  Team
+                </a>
+              </li>
+            <%end%>
           <%end%>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">
-              <i class="fa fa-envelope-o">
-                <span class="badge badge-warning">11</span>
-              </i>
-              Disabled
-            </a>
-          </li>
+          
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fa fa-envelope-o">

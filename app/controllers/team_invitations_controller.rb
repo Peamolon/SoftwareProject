@@ -5,12 +5,13 @@ class TeamInvitationsController < ApplicationController
 
     def index
         @current_team = current_user.member.team if current_user.member.present?
-        @team_invitations = TeamInvitation.where(team_id: @current_team.id)
+        @team_invitations = TeamInvitation.where(team_id: @current_team.id, accepted_at: nil)
     end
 
     def new
         @team_invitation = TeamInvitation.new
     end
+    
 
     def create
         @team_invitation = TeamInvitation.new(team_invitation_params)
@@ -20,6 +21,20 @@ class TeamInvitationsController < ApplicationController
             flash[:notice] = "Invitation sent"
         else
             flash[:error] = "Invitation not sent!"
+            redirect_to teams_path
+        end
+    end
+
+    def accept_request 
+        @team_invitation = TeamInvitation.find(params[:id])
+        puts "Team Invitation: #{@team_invitation.inspect}"
+        @team_invitation.accepted_at = Date.today
+        if @team_invitation.save!
+            @team_invitation.member.update(team_id: @team_invitation.team_id)
+            redirect_to root_path
+            flash[:notice] = "Invitation accepted"
+        else
+            flash[:error] = "Invitation not accepted!"
             redirect_to teams_path
         end
     end

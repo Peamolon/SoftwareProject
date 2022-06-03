@@ -4,15 +4,17 @@ class TeamsController < ApplicationController
         @teams = Team.all
     end
 
-    def send_notification
-        @team = Team.find(send_notification_params)
-        
+    def show  
+        @team = Team.find(params[:id])
+        @members = @team.members
     end
 
+    def send_notification
+        @team = Team.find(send_notification_params)     
+    end
 
     private 
-
     def send_notification_params
-        params.require(:team).permit(:team_id)
+        params.require(:team).permit(:team_id, :member_id)
     end
 end

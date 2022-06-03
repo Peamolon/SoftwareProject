@@ -13,6 +13,7 @@
                             <tr>
                                 <td><%= team_invitation.member.user.full_name %></td>
                                 <td><%= team_invitation.member.framework %></td>
+                                <td><%= button_to 'Aceptar',accept_request_team_invitations_path(id: team_invitation.id), method: :put ,class: 'button is-primary'%>
                             </tr>
                     </table>       
                 </div>
