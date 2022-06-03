@@ -7,20 +7,24 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="/">
               <i class="fa fa-home"></i>
               Home
               <span class="sr-only">(current)</span>
               </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="fa fa-envelope-o">
-                <span class="badge badge-danger">11</span>
-              </i>
-              Link
-            </a>
-          </li>
+          <% if user_signed_in?%>
+            <%if current_user.has_role? :captain%>
+              <li class="nav-item">
+                <a class="nav-link" href="/team_invitations">
+                  <i class="fa fa-envelope-o">
+                    <span class="badge badge-danger"><%=current_user.member.team.team_invitations.count %></span>
+                  </i>
+                  requests
+                </a>
+              </li>
+            <% end %>
+          <%end%>
           <li class="nav-item">
             <a class="nav-link disabled" href="#">
               <i class="fa fa-envelope-o">

@@ -1,0 +1,22 @@
+<h1>Estas son las invitaciones</h1>
+<div class="container is-centered" style="margin: 0 auto;">
+    <% @team_invitations.each do |team_invitation| %>
+        <div class="col-12 col-md-6 mt-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Framework</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><%= team_invitation.member.user.full_name %></td>
+                                <td><%= team_invitation.member.framework %></td>
+                            </tr>
+                    </table>       
+                </div>
+            </div>
+        </div>
+    <%end%>
+</div>

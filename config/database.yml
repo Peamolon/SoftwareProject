@@ -24,6 +24,8 @@ development:
   database: software_database
   username: root
   host: localhost
+  <<: *default
+  database: software_database
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
