@@ -19,6 +19,11 @@ default: &default
   socket: /tmp/mysql.sock
 
 development:
+  adapter: mysql2
+  encoding: utf8
+  database: software_database
+  username: root
+  host: localhost
   <<: *default
   database: software_data_base
 
