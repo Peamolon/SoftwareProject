@@ -14,6 +14,9 @@
                             <tr>
                                 <td><%= member.full_name %></td>
                                 <td><%= member.framework %></td>
+                                <% if member.has_role? :captain%>
+                                    <td>Capitan</td>
+                                <% end %>
                             </tr>
                         <% end %>
                 </table>
