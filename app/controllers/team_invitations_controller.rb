@@ -27,11 +27,11 @@ class TeamInvitationsController < ApplicationController
 
     def accept_request 
         @team_invitation = TeamInvitation.find(params[:id])
-        puts "Team Invitation: #{@team_invitation.inspect}"
         @team_invitation.accepted_at = Date.today
         if @team_invitation.save!
             @team_invitation.member.update(team_id: @team_invitation.team_id)
             redirect_to root_path
+            #UserMailer.with(@team_invitation.member.user, @team_invitation.team).welcome_email.deliver_now
             flash[:notice] = "Invitation accepted"
         else
             flash[:error] = "Invitation not accepted!"

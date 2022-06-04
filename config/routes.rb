@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {registrations: 'users/registrations', sessions: 'users/sessions'}
   root 'home#index'
-  resources :teams, only: [:index, :show]
+  resources :teams, only: [:index, :show, :new, :create] do
+    collection do
+      put :remove_member
+    end
+  end
   resources :team_invitations, only: [:new, :create, :index] do
     collection do
       put :accept_request

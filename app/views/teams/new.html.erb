@@ -1,0 +1,11 @@
+<div class="container">
+    <%= form_with model: @team do |f| %>
+        <div class="field">
+            <%= f.label :name, 'Team Name' %>
+            <%= f.text_field :name, class: 'form-control' %>
+        </div>
+        <div class="field">
+            <%= f.submit %>
+        </div>
+    <% end %>
+</div>

@@ -21,10 +21,12 @@
                     <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-linkedin"></i></a></li>
                 </ul>
                 <br>
-                <%= button_to 'Eliminar', root_path, class: 'button'%>
+                <% if (current_user.has_role? :captain) %>
+                    <%= button_to 'Remove', remove_member_teams_path(member_to_remove_id: member.id), class: 'btn btn-danger' ,method: :put,form: {data: {turbo_confirm: 'Are you sure? if your are the captain this role will be granted to a random member'}} %>
+                <% end %>
             </div>
         </div>
-
       <%end%>
+    </div>
   </div>
 
