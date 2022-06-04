@@ -5,6 +5,12 @@ class Team < ApplicationRecord
     has_many :team_invitations, class_name: 'TeamInvitation', foreign_key: 'team_id'
     validates :name, presence: true, uniqueness: true
 
+    after_create :set_token
+
+    def send_welcome_email
+        UserMailer.welcome_email(self).deliver_now
+    end
+
     def has_captain?
         captain.present?
     end
@@ -19,4 +25,7 @@ class Team < ApplicationRecord
         errors.add("Team size must be between 1 and 3") if members.count > 3
     end
 
+    def set_token
+        self.token = SecureRandom.hex(10)
+    end
 end
