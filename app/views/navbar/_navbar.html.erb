@@ -1,9 +1,9 @@
+<!---
 <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a href="#"><%= image_tag 'logo.png' %></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
@@ -13,27 +13,29 @@
               <span class="sr-only">(current)</span>
               </a>
           </li>
+            <li class="nav-item">
+                <a class="nav-link scrollto" href="#services">Services</a>
+            </li>
           <% if user_signed_in?%>
             <%if current_user.has_role? :captain%>
               <li class="nav-item">
                 <a class="nav-link" href="/team_invitations">
                   <i class="fa fa-envelope-o">
-                    <span class="badge badge-danger"><%=current_user.member.team.team_invitations.where(accepted_at: nil).count %></span>
+                    <span class="badge badge-danger"><%=current_user.member.team.team_invitations.count %></span>
                   </i>
                   requests
                 </a>
               </li>
             <% end %>
-            <% if current_user.member.has_team?%>
-              <li class="nav-item">
-                <a class="nav-link" href="/teams/<%=current_user.member.team.id%>">
-                  <i class="fa fa-users"></i>
-                  Team
-                </a>
-              </li>
-            <%end%>
           <%end%>
-          
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">
+              <i class="fa fa-envelope-o">
+                <span class="badge badge-warning">11</span>
+              </i>
+              Disabled
+            </a>
+          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fa fa-envelope-o">
@@ -79,3 +81,55 @@
         
       </div>
     </nav>
+
+    
+--->
+
+
+
+
+
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <a href="#"><%= image_tag 'logo.png' %></a>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto" style="margin-left: auto;">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <% if user_signed_in?%>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+             <%if current_user.has_role? :captain%>
+              <li class="nav-item">
+                <a class="nav-link" href="/team_invitations">
+                  <i class="fa fa-envelope-o">
+                    <span class="badge badge-danger"><%=current_user.member.team.team_invitations.count %></span>
+                  </i>
+                  requests
+                </a>
+              </li>
+            <% end %>
+            <li class="nav-item">
+                <%= link_to 'Log out',destroy_user_session_path,class: 'nav-link', :method => :delete %>
+            </li>
+        <%else%>
+            <li class="nav-item">
+                <%= link_to 'Log in',new_user_session_path,class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+                <%= link_to 'Sign up',new_user_registration_path,class: 'nav-link' %>
+            </li>
+        <%end%>
+
+      </ul>
+    </div>
+  </div>
+</nav>
