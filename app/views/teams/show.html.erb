@@ -1,11 +1,15 @@
 <div class="container py-5" >
+  <% flash.each do |type, msg| %>
+    <div class="alert alert-warning">
+      <%= msg %>
+    </div>
+  <% end %>
     <div class="row mb-4 tex-center">
       <div class="col-lg-5">
         <h2 class="display-4 font-weight-light"><%= @team.name %></h2>
         <p class="font-italic text-muted">Meet your teammates, and let's code!</p>
       </div>
     </div>
-    
     <div class="row text-center">
       <!-- Team item-->
       <% @members.each do |member|%>

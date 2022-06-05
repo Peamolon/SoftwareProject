@@ -15,6 +15,16 @@ class User < ApplicationRecord
     return "#{name} #{last_name}"
   end
 
+  def self.to_csv
+    attributes = %w[id name last_name id_number email created_at ]
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+      all.each do |user|
+        csv << attributes.map { |attr| user.send(attr) }
+      end
+    end
+  end
+
   private
 
   def set_default_role

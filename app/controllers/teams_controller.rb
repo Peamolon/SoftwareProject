@@ -27,6 +27,21 @@ class TeamsController < ApplicationController
         end
     end
 
+    def destroy
+        @team_invitations = TeamInvitation.where(team_id: params[:id])
+        @team = Team.find(params[:id])
+        @team_invitations.destroy_all
+        @captain = @team.captain
+        if @team.destroy
+            @captain.roles.where(name: "captain").destroy_all
+            flash[:notice] = "Team deleted"
+            redirect_to root_path
+        else
+            flash[:error] = "Team not deleted"
+            redirect_back(fallback_location: admin_index_path)
+        end
+    end
+
 
     def send_notification
         @team = Team.find(send_notification_params)     
