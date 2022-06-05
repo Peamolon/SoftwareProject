@@ -13,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # POST /resource
     def create
       super
-      current_user.add_role :member if current_user.present?
+      current_user.add_role :member if current_user.present? 
     end
 
     # GET /resource/edit
@@ -53,7 +53,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     # The path used after sign up.
     def after_sign_up_path_for(resource)
-      super(resource)
+      new_team_invitation_path
     end
 
     # The path used after sign up for inactive accounts.

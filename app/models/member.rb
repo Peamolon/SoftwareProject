@@ -5,4 +5,8 @@ class Member < ApplicationRecord
   validates :framework, presence: true
 
   scope :with_no_team, -> { where(team_id: nil) }
+
+  def has_team?
+    team.present?
+  end
 end

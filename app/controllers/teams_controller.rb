@@ -4,15 +4,51 @@ class TeamsController < ApplicationController
         @teams = Team.all
     end
 
-    def send_notification
-        @team = Team.find(send_notification_params)
-        
+    def show  
+        @team = Team.find(params[:id])
+        @members = @team.members
+    end
+
+    def new
+        @team = Team.new
+    end
+
+    def create
+        @team = Team.new(team_params)
+        @user = current_user
+        puts "El current user es #{@user.email}"
+        @create_team_service = ::CreateTeamService.new(@team, @user);
+        if @create_team_service.perfom
+            redirect_to team_path(@team)
+            flash[:notice] = "Team created"
+        else
+            flash[:error] = "Team not created"
+            redirect_back(fallback_location: new_team_path)
+        end
     end
 
 
+    def send_notification
+        @team = Team.find(send_notification_params)     
+    end
+
+    def remove_member
+        @member = Member.find(params[:member_to_remove_id])
+        @team = @member.team
+        if @member.user.has_role? :captain
+            @member.user.roles.find_by(name: 'captain').destroy!
+            @team.set_new_captain!
+        end
+        @member.update(team_id: nil)
+        redirect_to root_path
+    end
+
     private 
+    def team_params
+        params.require(:team).permit(:name, :description)
+    end
 
     def send_notification_params
-        params.require(:team).permit(:team_id)
+        params.require(:team).permit(:team_id, :member_id)
     end
 end
