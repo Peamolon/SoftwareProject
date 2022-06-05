@@ -4,9 +4,21 @@
   <section id="hero">
     <div class="hero-container" data-aos="zoom-in" data-aos-delay="100">
       <h1>Welcome to hackathon</h1>
-      <%= controller_name %>
-      <h2>What are you waiting to sign up? </h2>
-      <a href="#about" class="btn-get-started">Sign Up here! </a>
+      
+      <h2><%=@home_message%> </h2>
+      <% if @status == 'not_signed_in' %>
+        <a href="<%=new_user_registration_path%>" class="btn-get-started">Sign Up here! </a>
+      <% elsif @status == 'member' %>
+        <% if current_user.member.has_team? %>
+          <a href="/teams/<%=current_user.member.team.id%>" class="btn-get-started scrollto">Your Team</a>
+        <% else %>
+          <a href="/team_invitations/new" class="btn-get-started scrollto">Join team</a>
+          <a href="/teams/new" class="btn-get-started scrollto">Create Team</a>
+        <% end %>
+      <% else %>
+        <a href="/team_invitations/new" class="btn-get-started scrollto">Eres un admin</a>
+        <a href="/teams/new" class="btn-get-started scrollto">Admin</a>
+      <%end%>
     </div>
   </section><!-- End Hero Section -->
 

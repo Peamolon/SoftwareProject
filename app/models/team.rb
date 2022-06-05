@@ -7,10 +7,6 @@ class Team < ApplicationRecord
 
     after_create :set_token
 
-    def send_welcome_email
-        UserMailer.welcome_email(self).deliver_now
-    end
-
     def has_captain?
         captain.present?
     end

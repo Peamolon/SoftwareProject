@@ -1,22 +1,28 @@
-<div class="login-container">
-    <h3 class="login-title">Login</h3>
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="form-group">
-        <%= f.email_field :email, autofocus: true, class: 'form-control' ,autocomplete: "email", placeholder: 'Email' %>
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+<div class="login-container" style = "margin-top: 100px">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="form-group">
+      <div class="login-title">
+        <img  class="login-image" src="https://cdn-icons-png.flaticon.com/512/7615/7615876.png">
       </div>
-      <div class="form-group">
-        <%= f.password_field :password,class: 'form-control' , autocomplete: "current-password", placeholder: 'Password' %>
+      <div class="login-title">
+        <h3>Login</h3>
       </div>
-      <% if devise_mapping.rememberable? %>
-        <div class="form-group form-check">
-          <%= f.check_box :remember_me, class: 'form-check-input' %>
-          <%= f.label :remember_me, class: 'form-check-label' %>
-        </div>
-      <% end %>
-      <%= f.submit "Log in", class: "btn btn-primary btn-width"%>
-      <br><br>
-      <small id="emailHelp" class="form-text text-muted">Already have an account? <a href="">Login</a></small>
+      <%= f.email_field :email, autofocus: true, class: 'form-control' ,autocomplete: "email", placeholder: 'Email' %>
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+        else.</small>
+    </div>
+    <div class="form-group">
+      <%= f.password_field :password,class: 'form-control' , autocomplete: "current-password", placeholder: 'Password' %>
+    </div>
+    <% if devise_mapping.rememberable? %>
+      <div class="form-group form-check">
+        <%= f.check_box :remember_me, class: 'form-check-input' %>
+        <%= f.label :remember_me, class: 'form-check-label' %>
+      </div>
     <% end %>
+    <%= f.submit "Submit", class: "btn btn-primary btn-width"%>
+    <br><br>
+    <small id="emailHelp" class="form-text text-muted">Already have an account? <a href="">Login</a></small>
+  <% end %>
 </div>
 

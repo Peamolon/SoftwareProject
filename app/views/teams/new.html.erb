@@ -1,11 +1,22 @@
-<div class="container">
-    <%= form_with model: @team do |f| %>
-        <div class="field">
-            <%= f.label :name, 'Team Name' %>
-            <%= f.text_field :name, class: 'form-control' %>
+<div class="container signup-container mt-3">
+  <div class="col-12 signup-form" style="margin-top: 100px;">
+    <%= form_with  model: @team do |f|%>
+      <div class="form-group">
+        <div class="login-title mt-3">
+          <img class="login-image"
+               src="https://cdn-icons-png.flaticon.com/512/7647/7647288.png">
         </div>
-        <div class="field">
-            <%= f.submit %>
+        <div class="login-title">
+          <h4>Create your team!</h4>
         </div>
+        <h5 class="mt-5 title-member"> <img src="https://cdn-icons-png.flaticon.com/512/1828/1828817.png" alt="" width="20">  Team name </h5>
+        <div class="form-group mb-3">
+          <%= f.text_field :name, class: "form-control", placeholder: 'Name', required: true %>
+        </div>
+        <h5 class="mt-3 title-member"> <img src="https://cdn-icons-png.flaticon.com/512/1828/1828817.png" alt="" width="20">  Description </h5>
+        <%= f.text_area :description, class: "form-control mb-3", placeholder: 'Description', rows: '3' ,required: true %>
+        <%= f.submit 'Create team', class: 'btn btn-primary btn-width' %>
+      </div>
     <% end %>
+  </div>
 </div>

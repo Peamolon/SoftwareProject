@@ -5,7 +5,7 @@ class TeamInvitationsController < ApplicationController
 
     def index
         @current_team = current_user.member.team if current_user.member.present?
-        @team_invitations = TeamInvitation.where(team_id: @current_team.id, accepted_at: nil)
+        @team_invitations = TeamInvitation.joins(:member).where(team_id: @current_team.id, accepted_at: nil).where(member: {team_id: nil})
     end
 
     def new

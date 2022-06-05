@@ -15,9 +15,10 @@ class TeamsController < ApplicationController
 
     def create
         @team = Team.new(team_params)
-        if @team.save
-            current_user.member.update(team_id: @team.id)
-            current_user.add_role :captain
+        @user = current_user
+        puts "El current user es #{@user.email}"
+        @create_team_service = ::CreateTeamService.new(@team, @user);
+        if @create_team_service.perfom
             redirect_to team_path(@team)
             flash[:notice] = "Team created"
         else
@@ -44,7 +45,7 @@ class TeamsController < ApplicationController
 
     private 
     def team_params
-        params.require(:team).permit(:name)
+        params.require(:team).permit(:name, :description)
     end
 
     def send_notification_params

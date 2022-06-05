@@ -1,9 +1,9 @@
 class UserMailer < ApplicationMailer
     
-    def welcome_email(user)
+    def welcome_email(user, team)
         @user = user
-        @url = 'http://example.com/login'
-        mail(to: 'sergioeduardo2000@gmail.com', subject: "Welcome to team")
+        @team = team
+        mail(to: @user.email, subject: "Welcome to team #{@team.name}")
     end
 
 end
