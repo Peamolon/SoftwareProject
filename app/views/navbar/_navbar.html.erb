@@ -28,7 +28,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/team_invitations">
                 <i class="fa fa-envelope-o">
-                  <span class="badge badge-danger"><%=current_user.member.team.team_invitations.count %></span>
+                  <span class="badge badge-danger"><%=current_user.member.team.team_invitations.where(accepted_at: nil).count %></span>
                 </i>
                 requests
               </a>

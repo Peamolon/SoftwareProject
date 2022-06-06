@@ -18,6 +18,10 @@ Team.all.each do |team|
     (0...number).each{ Member.with_no_team.sample.update(team_id: team.id) if Member.with_no_team.present? }
 end
 
+Team.all.each do |team|
+  team.members.sample.user.add_role :captain
+end
+
 
 
 

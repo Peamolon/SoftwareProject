@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+  get 'members/new'
+  get 'members/create'
   devise_for :users, controllers: {registrations: 'users/registrations', sessions: 'users/sessions'}
   root 'home#index'
   resources :teams, only: [:index, :show, :new, :create, :destroy] do
     collection do
       put :remove_member
+      post :join_with_password
     end
     get '*path' => redirect('/')
   end
@@ -13,6 +16,7 @@ Rails.application.routes.draw do
     end
     get '*path' => redirect('/')
   end
+  resources :members, only: [:new, :create]
 
   get 'admin/members_info', to: 'admin#export', as: :export_data
 

@@ -18,7 +18,7 @@ class Team < ApplicationRecord
     end
 
     def set_new_captain!
-        @new_captain = self.members.sample.add_role :captain if self.members.present?
+        self.users.sample.add_role :captain if self.members.present?
     end
 
     private  
