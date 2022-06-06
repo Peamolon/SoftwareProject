@@ -11,7 +11,7 @@
         <% if @team.members.count < 3 %>
           <%= link_to 'Add member',new_member_path, class: 'button is-info' %>
         <%else %>
-          <p class="alert alert-danger">You have reached the maximum number of members for this team.</p>
+          <p class="alert">You have reached the maximum number of members for this team.</p>
         <% end %>
       </div>
     </div>
