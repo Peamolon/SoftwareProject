@@ -7,7 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 #create teams
-(0..10).each {|number| Team.create(name: "Team #{number}")}
+(0..10).each {|number| Team.create(name: "Team #{Faker::Sports::Football.player}")}
 
 #create users 
 (0..30).each { User.create(name: Faker::Name::first_name, last_name: Faker::Name::last_name, email: Faker::Internet.email, id_number: Faker::IDNumber.valid, framework: ['Java', 'C++', 'C#'].sample, password: '123456'  )}
@@ -16,6 +16,10 @@
 Team.all.each do |team|
     number = [1,2,3].sample
     (0...number).each{ Member.with_no_team.sample.update(team_id: team.id) if Member.with_no_team.present? }
+end
+
+Team.all.each do |team|
+  team.members.sample.user.add_role :captain
 end
 
 

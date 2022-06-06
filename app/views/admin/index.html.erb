@@ -1,0 +1,46 @@
+<div class="content">
+  <div class="content__inner">
+    <div class="container">
+      <div class="container overflow-hidden">
+        <div class="multisteps-form">
+          <div class="row">
+            <div class="col-12 col-lg-8 m-auto">
+              <div class="multisteps-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn">
+                <h3 class="multisteps-form__title">All the created teams </h3>
+                <div class="multisteps-form__content">
+                  <div class="form-row mt-4">
+                    <% @teams.each do |team| %>
+                      <div class="col-12 col-md-6 mt-4">
+                        <div class="card shadow-sm">
+                          <div class="card-body">
+                            <p class="subtitle card-text" style="font-weight: bold;"><%= team.name %></p>
+                            <table class="table">
+                              <thead>
+                              <th scope="col">Name  team_path</th>
+                              <th scope="col">Framework</th>
+                              </thead>
+                              <tbody>
+                              <% team.users.each do |user| %>
+                                <tr>
+                                  <td><%= user.full_name %></td>
+                                  <td><%= user.framework %></td>
+                                  <% if user.has_role? :captain%>
+                                    <td>Captain</td>
+                                  <% end %>
+                                </tr>
+                              <% end %>
+                              </table>
+                            <%= button_to 'Delete team', team_path(team.id), class: 'btn btn-danger' ,method: :delete %>
+                          </div>
+                        </div>
+                      </div>
+                    <%end%>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

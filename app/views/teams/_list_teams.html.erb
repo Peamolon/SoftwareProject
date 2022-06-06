@@ -31,7 +31,16 @@
                         <p>The team is full.</p>
                     </div>
                 <%else%>
-                    <button onclick="sendInvitation(<%= team.id %>)" class="btn btn-primary">Join team</button>                
+                    <%= form_with url: join_with_password_teams_path(team_id: team.id), method: :post do |f| %>
+                        <div class="field">
+                          <div class="join-form" style= "display: flex;">
+                            <%= f.text_field :password, class:'form-control', placeholder: 'Password', required: true %>
+                            <%= f.submit 'Submit', class: 'btn btn-primary btn-join' %>
+                          </div>
+                        </div>
+                    <% end %>
+                    <br>
+                    <button onclick="sendInvitation(<%= team.id %>)" class="btn btn-primary">Request join team</button>
                 <%end%>
             </div>
         </div>

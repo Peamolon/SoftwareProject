@@ -1,0 +1,39 @@
+<div class="container signup-container mt-3">
+
+  <!-- FIRST MEMBER -->
+  <div class="col-12 signup-form" style="margin-top: 100px;">
+    <br>
+    <%= form_with model: @member do |f| %>
+      <% if @member.errors.any? %>
+        <div class="alert alert-danger">
+          <% @member.errors.full_messages.each do |msg| %>
+            <%= msg %><br>
+          <% end %>
+        </div>
+      <% end %>
+      <div class="form-group">
+        <div class="login-title">
+          <h4>Add a new member <img src="https://cdn-icons-png.flaticon.com/512/1828/1828817.png" alt=""
+                                    width="20"></h4>
+        </div>
+        <h5 class="mt-5 title-member"> </h5>
+        <div class="form-group mb-3">
+          <%= f.text_field :name, class: 'form-control', placeholder: 'Name' %>
+        </div>
+        <div class="form-group mb-3">
+          <%= f.text_field :last_name, class: 'form-control', placeholder: 'Last name' %>
+        </div>
+        <div class="form-group mb-3">
+          <%= f.number_field :id_number, class: 'form-control', placeholder: 'Id number' %>
+        </div>
+        <div class="form-group mb-3">
+          <%= f.email_field :email, class: 'form-control', placeholder: 'Email' %>
+        </div>
+
+        <div class="form-group mb-3">
+          <%= f.select :framework, options_for_select([['Java','Java'],['C#','C#'],['C++','C++']], :selected => params[:framework]), {}, { :class => 'form-control', placeholder: 'Framework' } %>
+        </div>
+        <%= f.submit 'Submit', class: 'btn btn-primary btn-width' %>
+    <%end%>
+  </div>
+</div>

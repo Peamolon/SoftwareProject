@@ -54,7 +54,5 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
-  database: SoftwareProject_production
-  username: SoftwareProject
-  password: <%= ENV["SOFTWAREPROJECT_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
+

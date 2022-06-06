@@ -5,14 +5,20 @@ class Team < ApplicationRecord
     has_many :team_invitations, class_name: 'TeamInvitation', foreign_key: 'team_id'
     validates :name, presence: true, uniqueness: true
 
-    after_create :set_token
+    before_create :set_token
 
     def has_captain?
-        captain.present?
+        ids = self.members.joins(:user).pluck('users.id')
+        return User.where(id: ids).joins(:roles).where(roles: {name: 'captain'}).present?
+    end
+
+    def captain
+        ids = self.members.joins(:user).pluck('users.id')
+        return User.where(id: ids).joins(:roles).where(roles: {name: 'captain'}).first
     end
 
     def set_new_captain!
-        @new_captain = self.members.sample.add_role :captain if self.members.present?
+        self.users.sample.add_role :captain if self.members.present?
     end
 
     private  
